@@ -3,6 +3,7 @@ import { panoptes } from '@zooniverse/panoptes-js'
 import { Button, CheckBox, Grommet, Box, base as baseTheme } from 'grommet'
 import _ from 'lodash'
 import oauth from 'panoptes-client/lib/oauth'
+import talkClient from 'panoptes-client/lib/talk-client'
 import queryString from 'query-string'
 import React from 'react'
 
@@ -155,12 +156,12 @@ class App extends React.Component {
     const key = this.state.cachePanoptesData ? 'cachedClassifier' : 'classifier'
 
     return (
-      <Grommet 
+      <Grommet
         background={{
           dark: 'dark-1',
           light: 'light-1'
         }}
-        theme={mergedThemes} 
+        theme={mergedThemes}
         themeMode={(this.state.dark) ? 'dark' : 'light'}
       >
         <Box as='main'>
@@ -193,6 +194,7 @@ class App extends React.Component {
               showTutorial
               subjectID={this.props.subjectID}
               subjectSetID={this.props.subjectSetID}
+              talkClient={talkClient}
               workflowID={workflowID}
             />
           </Box>

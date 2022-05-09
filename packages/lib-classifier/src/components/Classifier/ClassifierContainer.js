@@ -59,10 +59,11 @@ export default function ClassifierContainer({
   showTutorial=false,
   subjectID,
   subjectSetID,
+  talkClient,
   workflowID
 }) {
   const [loaded, setLoaded] = useState(false)
-  const storeEnvironment = { authClient, client }
+  const storeEnvironment = { authClient, client, talkClient }
 
   const workflowSnapshot = useWorkflowSnapshot(workflowID)
 
@@ -161,5 +162,6 @@ ClassifierContainer.propTypes = {
     id: PropTypes.string.isRequired
   }).isRequired,
   showTutorial: PropTypes.bool,
+  talkClient: PropTypes.object.isRequired,
   theme: PropTypes.object
 }

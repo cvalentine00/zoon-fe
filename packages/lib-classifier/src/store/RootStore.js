@@ -131,6 +131,10 @@ const RootStore = types
 
     get client () {
       return getEnv(self).client
+    },
+
+    get talkClient () {
+      return getEnv(self).talkClient
     }
   }))
 
