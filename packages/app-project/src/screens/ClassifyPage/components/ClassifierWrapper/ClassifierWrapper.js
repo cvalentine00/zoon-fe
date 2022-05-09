@@ -1,6 +1,7 @@
 import Classifier from '@zooniverse/classifier'
 import { useRouter } from 'next/router'
 import auth from 'panoptes-client/lib/auth'
+import talkClient from 'panoptes-client/lib/talk-client'
 import { bool, func, string, shape } from 'prop-types'
 import asyncStates from '@zooniverse/async-states'
 
@@ -29,6 +30,7 @@ export default function ClassifierWrapper({
   showTutorial = false,
   subjectID,
   subjectSetID,
+  talkClient = talkClient,
   user,
   userID,
   workflowID,
@@ -77,7 +79,7 @@ export default function ClassifierWrapper({
   if (somethingWentWrong) {
     const { error: projectError } = project
     const { error: userError } = user
-    
+
     const errorToMessage = projectError || userError || new Error('Something went wrong')
     return (
       <ErrorMessage error={errorToMessage} />
@@ -104,6 +106,7 @@ export default function ClassifierWrapper({
           showTutorial={showTutorial}
           subjectID={subjectID}
           subjectSetID={subjectSetID}
+          talkClient={talkClient}
           workflowID={workflowID}
         />
       )
@@ -152,6 +155,8 @@ ClassifierWrapper.propTypes = {
   subjectID: string,
   /** optional subject set ID (from the page URL.) */
   subjectSetID: string,
+  /** Panoptes Talk client */
+  talkClient: shape({}),
   /** Current logged-in user */
   user: shape({
     error: string
