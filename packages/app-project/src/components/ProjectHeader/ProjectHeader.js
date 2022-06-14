@@ -15,7 +15,6 @@ import UnderReviewLabel from './components/UnderReviewLabel'
 const StyledBox = styled(Box)`
   position: relative;
 `
-const environment = process.env.APP_ENV
 
 function ProjectHeader ({
   availableLocales = [],
@@ -25,8 +24,6 @@ function ProjectHeader ({
   screenSize = '',
   title
 }) {
-
-  const hasTranslations = environment === 'development' && availableLocales?.length > 1
   return (
     <StyledBox as='header' className={className}>
       <Background />
@@ -53,7 +50,7 @@ function ProjectHeader ({
                 <UnderReviewLabel />}
             </Box>
             <ApprovedIcon isNarrow={screenSize === 'small'} />
-            {hasTranslations && <LocaleSwitcher availableLocales={availableLocales} />}
+            <LocaleSwitcher availableLocales={availableLocales} />
           </Box>
         </Box>
         {screenSize !== 'small' && <Nav navLinks={navLinks} />}

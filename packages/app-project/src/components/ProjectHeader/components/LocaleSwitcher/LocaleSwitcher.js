@@ -1,10 +1,11 @@
-import localeMenu from '@helpers/localeMenu'
 import { Box, Menu } from 'grommet'
 import { arrayOf, shape, string } from 'prop-types'
 import { SpacedText } from '@zooniverse/react-components'
 import { FormDown } from 'grommet-icons'
 import styled, { css, withTheme } from 'styled-components'
 import { useRouter } from 'next/router'
+
+import { localeMenu, withEnvironments } from '@helpers'
 
 const StyledBox = styled(Box)`
   padding: 10px 10px 10px 15px;
@@ -29,6 +30,10 @@ const StyledBox = styled(Box)`
 const LocaleSwitcher = ({ availableLocales }) => {
   const router = useRouter()
   const { asPath, basePath, locale, pathname, query } = router
+
+  if (availableLocales.length < 2) {
+    return null
+  }
 
   const items = availableLocales.map(availableLocale => ({
     href: `${basePath}/${availableLocale}${asPath}`,
@@ -67,5 +72,6 @@ LocaleSwitcher.propTypes = {
   })
 }
 
-export default withTheme(LocaleSwitcher)
+const ThemedLocaleSwitcher = withTheme(LocaleSwitcher)
+export default withEnvironments(ThemedLocaleSwitcher, 'development')
 export { LocaleSwitcher }
